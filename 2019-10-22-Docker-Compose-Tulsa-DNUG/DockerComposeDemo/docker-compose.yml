@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  dockercomposedemo:
+    image: ${DOCKER_REGISTRY-}dockercomposedemo
+    build:
+      context: .
+      dockerfile: DockerComposeDemo/Dockerfile
+    depends_on: 
+      - db
+  db:
+    image: "mcr.microsoft.com/mssql/server:2017-latest"
+    environment:
+      SA_PASSWORD: "Pass@word1"
+      ACCEPT_EULA: "Y"
+    ports:
+      - 1433:1433
+    volumes: 
+      - 'C:\sandbox\presentations\2019-10-22-Docker-Compose-Tulsa-DNUG\DockerComposeDemo\SQL\sqlvolume:/var/opt/mssql/data'
