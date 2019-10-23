@@ -6,6 +6,17 @@ services:
     build:
       context: .
       dockerfile: DockerComposeDemo/Dockerfile
+    environment:
+      SQL_CONNECTION: "Server=db;Database=DockerComposeDemo;User=sa;Password=Pass@word1;"
+    depends_on: 
+      - db
+  dockercomposedemo1:
+    image: ${DOCKER_REGISTRY-}dockercomposedemo1
+    build:
+      context: .
+      dockerfile: DockerComposeDemo/Dockerfile
+    environment:
+      SQL_CONNECTION: "Server=db;Database=DockerComposeDemo;User=sa;Password=Pass@word1;"
     depends_on: 
       - db
   db:
@@ -16,4 +27,4 @@ services:
     ports:
       - 1433:1433
     volumes: 
-      - 'C:\sandbox\presentations\2019-10-22-Docker-Compose-Tulsa-DNUG\DockerComposeDemo\SQL\sqlvolume:/var/opt/mssql/data'
+      - 'C:\Sandbox\Presentations\2019-10-22-Docker-Compose-Tulsa-DNUG\DockerComposeDemo\SQL\sqlvolume:/var/opt/mssql/data'
